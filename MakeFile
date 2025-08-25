@@ -1,0 +1,16 @@
+CC = gcc
+CFLAGS = -Iinclude -Wall -Wextra
+SRC = src/main.c src/utils.c
+OBJ = $(SRC:.c=.o)
+TARGET = clean_ui
+
+all: $(TARGET)
+
+$(TARGET): $(OBJ)
+	$(CC) $(OBJ) -o $@
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+clean:
+	rm -f $(OBJ) $(TARGET)
