@@ -1,0 +1,32 @@
+name: C Project CI on Windows
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: 🔄 Checkout code
+      uses: actions/checkout@v3
+
+    - name: 🧰 Install MSYS2 with make & gcc
+      uses: msys2/setup-msys2@v2
+      with:
+        install: >-
+          make
+          gcc
+
+    - name: ⚙️ Build with make
+      shell: msys2 {0}
+      run: |
+        make
+
+    - name: 🚀 Run program
+      shell: msys2 {0}
+      run: |
+        ./clean_ui
